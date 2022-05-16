@@ -30,7 +30,8 @@ vault-up: ## Spin up a vault development server use it with  export VAULT_ADDR='
 	@docker run \
 	--rm --detach --name vault -p 8200:8200 \
 	-e 'VAULT_DEV_ROOT_TOKEN_ID=devtoken' \
-	--cap-add=IPC_LOCK vault 
+	--cap-add=IPC_LOCK vault ;\
+	vault login devtoken
 	
 .PHONY: vault-secret	
 vault-secret: ## Create a new version of secrets

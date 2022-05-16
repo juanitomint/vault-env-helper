@@ -44,6 +44,7 @@ spin up a local vault instance using docker
 export VAULT_ADDR='http://127.0.0.1:8200' 
 make install 
 make vault-up 
+vault login devtoken
 make vault-secret 
 make test-docker 
 ```
