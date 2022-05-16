@@ -3,7 +3,11 @@
 This project installs a vault helper 
 
 With the command kvault-env you can run containers with secrets the same way you do in kubernetes with [Banzai Mutating Webhook](https://banzaicloud.com/docs/bank-vaults/mutating-webhook/)
-
+## INSTALLATION
+```bash
+make install
+```
+## USAGE
 kvault-env will pick up secrets path from a dot env file
 
 .env 
@@ -15,18 +19,14 @@ VAULT_LAST_UPDATED=vault:secret/data/testapp#last_updated
 
 and inject the secrets to the the command 
 ```bash
-kvault-env printenv|grep VAULT
-INFO[0000] spawning process: [printenv]                  app=vault-env
-VAULT_PASSWORD=most_secure_secret
-VAULT_LAST_UPDATED=Sun 15 May 2022 07:57:35 PM -03
-VAULT_DBNAME=pato
-
+kvault-env docker-compose up
+INFO[0000] spawning process: 
+INFO[0000] spawning process: [docker-compose up]         app=vault-env
+Starting vault-env-helper_db_1 ... 
+Starting vault-env-helper_adminer_1 ... 
+Starting vault-env-helper_podinfo_1 ... 
 ```
 
-## INSTALLATION
-```bash
-make install
-```
 ## Uninstall/Remove
 ```bash
 make uninstall
@@ -37,10 +37,11 @@ make uninstall
 
 spin up a local vault instance using docker
 ```bash
-export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_ADDR='http://127.0.0.1:8200' 
+make install 
 make vault-up 
-make vault-secret
-make test-docker
+make vault-secret 
+make test-docker 
 ```
 Dcocker compose will spin up a database, adminer and podinfo
 
