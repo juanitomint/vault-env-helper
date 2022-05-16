@@ -1,6 +1,6 @@
 # Kubernetes like vault-env-helper
 
-This project installs a vault helper 
+This project installs a vault helper  (LINUX ONLY)
 
 With the command kvault-env you can run containers with secrets the same way you do in kubernetes with [Banzai Mutating Webhook](https://banzaicloud.com/docs/bank-vaults/mutating-webhook/)
 ## INSTALLATION
