@@ -46,11 +46,11 @@ Dcocker compose will spin up a database, adminer and podinfo
 
 you can use podman to check environment variables passed to container
 
- http://localhost:9898/env
+ ![http://localhost:9898/env](https://github.com/juanitomint/vault-env-helper/blob/main/img/podinfo.png?raw=true)
 
 or  access the db using adminer
 
- http://localhost:8080
+ ![http://localhost:8080](https://github.com/juanitomint/vault-env-helper/blob/main/img/adminer.png?raw=true)
 
 ## HELP
 ```bash
