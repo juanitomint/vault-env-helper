@@ -14,10 +14,7 @@ install: ## Installs binaries to ${TARGET_DIR}
 	@{ \
 	echo "installing on:${TARGET_DIR}..." ;\
 	curl ${VAULT-ENV_URL} --progress-bar -Lo vault-env.tar.gz ;\
-	tar -xzvf vault-env.tar.gz ;\
-	# id=$$(docker create ghcr.io/banzaicloud/vault-env:1.13.1) ;\
-	# docker cp $$id:/usr/local/bin/vault-env ./ ;\
-	#docker rm -v $$id  > /dev/null 2>&1 ;\
+	tar -xzvf vault-env.tar.gz vault-env;\
 	sudo cp ./kvault-env ${TARGET_DIR}/ && sudo cp ./vault-env ${TARGET_DIR}/ ;\
 	echo "ok!" ;\
 	}
