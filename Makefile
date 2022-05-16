@@ -1,5 +1,7 @@
 IMAGE_REPOSITORY  ?= 797740695898.dkr.ecr.us-east-1.amazonaws.com/observability-api
 CURRENT_DIR = $(shell pwd)
+ARCH= $(shell uname)
+VAULT-ENV_URL=https://github.com/banzaicloud/bank-vaults/releases/latest/download/vault-env-${ARCH}-amd64.tar.gz
 GIT_LAST_TAG=$(shell git tag --sort=committerdate|tail -n 1)
 GIT_TAG         ?=$(or ${CI_COMMIT_TAG},$(or ${GIT_LAST_TAG}, $(shell git rev-parse --short HEAD) ) )
 IMAGE_TAG         ?= ${GIT_TAG}
@@ -11,9 +13,11 @@ help:
 install: ## Installs binaries to ${TARGET_DIR}
 	@{ \
 	echo "installing on:${TARGET_DIR}..." ;\
-	id=$$(docker create ghcr.io/banzaicloud/vault-env:1.13.1) ;\
-	docker cp $$id:/usr/local/bin/vault-env ./ ;\
-	docker rm -v $$id  > /dev/null 2>&1 ;\
+	curl ${VAULT-ENV_URL} --progress-bar -Lo vault-env.tar.gz ;\
+	tar -xzvf vault-env.tar.gz ;\
+	# id=$$(docker create ghcr.io/banzaicloud/vault-env:1.13.1) ;\
+	# docker cp $$id:/usr/local/bin/vault-env ./ ;\
+	#docker rm -v $$id  > /dev/null 2>&1 ;\
 	sudo cp ./kvault-env ${TARGET_DIR}/ && sudo cp ./vault-env ${TARGET_DIR}/ ;\
 	echo "ok!" ;\
 	}
