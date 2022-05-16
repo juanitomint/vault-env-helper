@@ -1,0 +1,17 @@
+#!/bin/bash
+command -v vault-env >/dev/null 2>&1 || { echo >&2 "I require vault-env but it's not installed.  Aborting."; exit 1; }
+if [ -z $1 ]
+    then
+        echo "no executable supplied for vault-env"
+        echo "eg: kvault-env printenv" 
+        exit 128
+fi
+
+if [ -f .env ]
+    then
+        export $(grep -v '^#'  .env | xargs)
+        vault-env $*
+    else
+        echo "no .env file found"
+        exit 128
+fi

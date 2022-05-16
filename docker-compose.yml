@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD=${VAULT_PASSWORD}
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  podinfo:
+    image: stefanprodan/podinfo
+    ports:
+    - '9898:9898'
+    environment:
+      - VAULT_DBNAME=${VAULT_DBNAME}
+      - VAULT_PASSWORD=${VAULT_PASSWORD}
+      - VAULT_LAST_UPDATED=${VAULT_LAST_UPDATED}
