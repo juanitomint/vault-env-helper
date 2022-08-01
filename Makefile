@@ -1,7 +1,7 @@
 IMAGE_REPOSITORY  ?= 797740695898.dkr.ecr.us-east-1.amazonaws.com/observability-api
 CURRENT_DIR = $(shell pwd)
 ARCH= $(shell uname)
-VAULT-ENV_URL=https://github.com/banzaicloud/bank-vaults/releases/latest/download/vault-env-${ARCH}-amd64.tar.gz
+VAULT-ENV_URL=https://github.com/banzaicloud/bank-vaults/releases/download/1.15.1/vault-env-${ARCH}-amd64.tar.gz
 GIT_LAST_TAG=$(shell git tag --sort=committerdate|tail -n 1)
 GIT_TAG         ?=$(or ${CI_COMMIT_TAG},$(or ${GIT_LAST_TAG}, $(shell git rev-parse --short HEAD) ) )
 IMAGE_TAG         ?= ${GIT_TAG}
